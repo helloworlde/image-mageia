@@ -1,4 +1,7 @@
 # Mageia LXC
+Everything to build a Mageia LXC container.
+
+> Please note that the process is in heavy development. Do not use it (for the moment).
 
 ## Steps
 1. [Build Distrobuilder](https://github.com/lxc/distrobuilder#installing-from-source)
