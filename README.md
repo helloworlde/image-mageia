@@ -13,7 +13,7 @@ Everything to build a Mageia LXC container.
 7. Start container
 
 ## Create bridge interface
-Install `brctl`, used to manage bridge interfaces.
+Install `bridge-utils`, used to manage bridge interfaces.
 Then, create a bridge. 
 ```Bash
 # brctl addbr br0
