@@ -16,21 +16,27 @@ Everything to build a Mageia LXC container.
 Install `bridge-utils`, used to manage bridge interfaces.
 Then, create a bridge. 
 ```Bash
-# brctl addbr br0
+brctl addbr br0
 ```
 
 ## Build Mageia container
 ```Bash
-# distrobuilder build-lxc ./mageia/scheme.yaml
+distrobuilder build-lxc ./mageia/scheme.yaml
 ```
 
 ## Add container to LXC
 ```Bash
-# lxc-create -n mageia -t local -- --metadata meta.tar.xz --fstree rootfs.tar.xz
+lxc-create -n mageia -t local -- --metadata meta.tar.xz --fstree rootfs.tar.xz
 ```
 
 ## Start container
 ```Bash
-# lxc-start -n mageia -F -f .config/lxc/default.conf
-bash-5.1# 
+lxc-start -n mageia -F -f .config/lxc/default.conf
+```
+
+## Notes
+```Bash
+sudo distrobuilder pack-lxc mageia.yaml rootfs/ out/
+sudo lxc-create --name mageia8 --template local -- --fstree out/rootfs.tar.xz --metadata out/meta.tar.xz
+sudo lxc-start -n mageia8 -F
 ```
