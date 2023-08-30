@@ -4,8 +4,10 @@ CT_NAME := $(DIST)$(DIST_VER)
 CT_PATH := $(shell pwd)/$(CT_NAME)
 ROOTFS = rootfs
 OUT = out
+distrobuilder = distrobuilder
+brctl = brctl
 
-minimal:
+minimal-fs:
 	mkdir $(CT_NAME)
 	rpm --rebuilddb --root=$(CT_PATH)
 
@@ -20,23 +22,21 @@ minimal:
 	$(info Installing minimal system...)
 	urpmi basesystem-minimal urpmi locales locales-en systemd --auto --no-recommends --urpmi-root $(CT_PATH) --root $(CT_PATH)
 
-squash-minimal:
-	mksquashfs $(CT_NAME) $(CT_NAME).sqfs || $(error "Need squashfs-tools package.)
+squash-fs:
+	mksquashfs $(CT_NAME) $(CT_NAME).sqfs
 
-lxc:
-	distrobuilder || $(error Need package distrobuilder: https://github.com/lxc/distrobuilder)
+out/rootfs.tar.xz out/meta.tar.xz: mageia.yaml 
 	$(info Building root FS...)
-	distrobuilder build-dir $(DIST).yaml $(ROOTFS)
+	$(distrobuilder) build-dir $(DIST).yaml $(ROOTFS)
+
 	$(info Packing container...)
-	distrobuilder pack-lxc $(DIST).yaml $(ROOTFS) $(OUT)
+	mkdir $(OUT) || true
+	$(distrobuilder) pack-lxc $(DIST).yaml $(ROOTFS) $(OUT)
 
 	$(info Creating network bridge...)
-	brctl || $(error Need package bridge-utils.)
-	brctl addbr vmbr0
+	$(brctl) addbr vmbr0
 
-pack-lxc:
-
-lxc-add:
+lxc-create:
 	lxc-create --name "${CT_NAME}" --template local -- --fstree $(OUT)/rootfs.tar.xz --metadata $(OUT)/meta.tar.xz
 
 lxc-start:
