@@ -1,0 +1,23 @@
+name: Self
+
+on:
+  push:
+    branches: [ "*" ]
+  pull_request:
+    branches: [ "*" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: install snapd
+      run: apt update && apt install -y snapd
+      
+    - name: install distrobuilder
+      run: snap install distrobuilder --classic
+  
+    - name: build lxc container
+      run: distrobuilder build-lxc mageia.yaml 
