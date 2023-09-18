@@ -8,20 +8,20 @@ env:
 jobs:
   clean_old_repo:
     name: Clean old repo
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Clean old repo
         run: sudo rm -rf .* *
   clone_repo:
     name: Clone repo
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: clean_old_repo
     steps:
       - name: Clone repo
         uses: actions/checkout@v3
   craft_minimal_system:
     name: Craft minimal system
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: clone_repo
     steps:
       - name: Cache squash-fs
@@ -43,7 +43,7 @@ jobs:
           path: ${{ env.os }}.sqfs
   build_for_target:
     name: Build for target
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: craft_minimal_system
     steps:
       - name: Cache build
