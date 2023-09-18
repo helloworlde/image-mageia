@@ -14,10 +14,10 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: install snapd
-      run: apt update && apt install -y snapd
+      run: sudo apt update && apt install -y snapd
       
     - name: install distrobuilder
-      run: snap install distrobuilder --classic
+      run: sudo snap install distrobuilder --classic
   
     - name: build lxc container
-      run: distrobuilder build-lxc mageia.yaml 
+      run: sudo distrobuilder build-lxc mageia.yaml 
