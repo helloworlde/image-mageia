@@ -6,16 +6,9 @@ env:
   os: mageia
 
 jobs:
-  clean_old_repo:
-    name: Clean old repo
-    runs-on: ubuntu-latest
-    steps:
-      - name: Clean old repo
-        run: sudo rm -rf .* *
   clone_repo:
     name: Clone repo
     runs-on: ubuntu-latest
-    needs: clean_old_repo
     steps:
       - name: Clone repo
         uses: actions/checkout@v3
