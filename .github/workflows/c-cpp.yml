@@ -20,4 +20,4 @@ jobs:
       run: sudo snap install distrobuilder --classic
   
     - name: build lxc container
-      run: sudo distrobuilder build-lxc mageia.yaml 
+      run: sudo distrobuilder build-lxc ubuntu.yaml 
