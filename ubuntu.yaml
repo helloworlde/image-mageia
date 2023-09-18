@@ -139,10 +139,10 @@ files:
   types:
   - vm
 
-- name: incus-agent
-  generator: incus-agent
-  types:
-  - vm
+# - name: incus-agent
+#   generator: incus-agent
+#   types:
+#   - vm
 
 - path: /etc/default/grub.d/50-incus.cfg
   generator: dump
