@@ -34,6 +34,6 @@ jobs:
       - name: Upload image
         uses: actions/upload-artifact@v3
         with:
-          name: image-${{ env.os }}-lxc
           path: |
-            ./*.xz
+            ./rootfs.tar.xz
+            ./meta.tar.xz
