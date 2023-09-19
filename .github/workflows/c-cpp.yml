@@ -7,21 +7,13 @@ on:
     branches: [ "*" ]
 
 jobs:
-  clone_repo:
-    name: Clone repo
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Clone repo
         uses: actions/checkout@v3
 
-  build-image:
-    name: Install Dependencies
-    runs-on: ubuntu-latest
-    needs: clone_repo
-
-    steps:
       - name: Update apt
-        uses: actions/cache@v3
         run: sudo apt update
 
       - name: Install debootstrap
@@ -34,7 +26,6 @@ jobs:
         run: sudo snap install distrobuilder --classic
 
       - name: Build Image
-        uses: actions/cache@v3
         run: sudo distrobuilder -o image.architecture=amd64 -o image.release=jammy build-lxc ubuntu.yaml
 
       - name: List files
