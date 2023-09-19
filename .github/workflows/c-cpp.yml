@@ -20,4 +20,4 @@ jobs:
       run: sudo snap install distrobuilder --classic
   
     - name: build lxc container
-      run: sudo distrobuilder build-lxc ubuntu.yaml 
+      run: sudo distrobuilder -o image.architecture=amd64 -o image.release=buster build-lxc ubuntu.yaml 
