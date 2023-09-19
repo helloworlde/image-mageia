@@ -5,7 +5,6 @@ on:
     branches: [ "*" ]
   pull_request:
     branches: [ "*" ]
-#  workflow_dispatch:
 
 jobs:
   clone_repo:
@@ -35,6 +34,7 @@ jobs:
         run: sudo snap install distrobuilder --classic
 
       - name: Build Image
+        uses: actions/cache@v3
         run: sudo distrobuilder -o image.architecture=amd64 -o image.release=jammy build-lxc ubuntu.yaml
 
       - name: List files
