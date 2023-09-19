@@ -16,14 +16,17 @@ jobs:
     - name: APT Update
       run: sudo apt update
       
-    - name: install snapd
+    - name: Install debootstrap
+      run: sudo apt install -y debootstrap
+      
+    - name: Install snapd
       run: sudo apt install -y snapd
       
-    - name: install distrobuilder
+    - name: Install distrobuilder
       run: sudo snap install distrobuilder --classic
     
     - name: List files
       run: sudo ls /usr/share/debootstrap/scripts
       
-    - name: build lxc container
+    - name: Build Image
       run: sudo distrobuilder -o image.architecture=amd64 -o image.release=buster build-lxc ubuntu.yaml 
