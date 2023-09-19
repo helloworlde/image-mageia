@@ -13,11 +13,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: APT Update
+      run: sudo apt update
+      
     - name: install snapd
-      run: sudo apt update && sudo apt install -y snapd
+      run: sudo apt install -y snapd
       
     - name: install distrobuilder
       run: sudo snap install distrobuilder --classic
-  
+    
+    - name: List files
+      run: sudo ls /usr/share/debootstrap/scripts
+      
     - name: build lxc container
       run: sudo distrobuilder -o image.architecture=amd64 -o image.release=buster build-lxc ubuntu.yaml 
