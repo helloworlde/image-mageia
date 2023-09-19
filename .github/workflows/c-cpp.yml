@@ -29,4 +29,4 @@ jobs:
       run: sudo ls /usr/share/debootstrap/scripts
       
     - name: Build Image
-      run: sudo distrobuilder -o image.architecture=amd64 -o image.release=buster build-lxc ubuntu.yaml 
+      run: sudo distrobuilder -o image.architecture=amd64 -o image.release=jammy build-lxc ubuntu.yaml 
