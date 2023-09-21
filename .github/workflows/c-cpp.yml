@@ -13,15 +13,18 @@ jobs:
       - name: Clone repo
         uses: actions/checkout@v3
 
+      - name: Install Golnag
+        run: wget https://go.dev/dl/go1.21.1.linux-amd64.tar.gz && sudo tar -xf go1.21.1.linux-amd64.tar.gz -C /usr/local && export PATH=$PATH:/usr/local.go/bin && go version
+
       - name: Update apt
         run: sudo apt update
         
       - name: Install dependencies
-        run: sudo apt install -y golang-go debootstrap rsync gpg squashfs-tools git
-        
+        run: sudo apt install -y debootstrap rsync gpg squashfs-tools git
+
       - name: Install distrobuilder
         run: git clone https://github.com/lxc/distrobuilder && cd ./distrobuilder && make && cd ..
-        
+
       - name: Build Image
         run: sudo $HOME/go/bin/distrobuilder build-lxc ubuntu.yaml
 
@@ -34,3 +37,4 @@ jobs:
           path: |
             ./rootfs.tar.xz
             ./meta.tar.xz
+
