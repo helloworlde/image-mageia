@@ -27,6 +27,9 @@ jobs:
 
       - name: Build Image
         run: sudo $HOME/go/bin/distrobuilder build-lxc ubuntu.yaml
+        
+      - name: Tar metadata
+        run: sudo tar -cvzf metadata.tar.gz metadata.yaml
 
       - name: List files
         run: sudo ls -alh
@@ -37,4 +40,5 @@ jobs:
           path: |
             ./rootfs.tar.xz
             ./meta.tar.xz
+            ./metadata.tar.gz
 
