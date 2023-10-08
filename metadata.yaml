@@ -1,0 +1,6 @@
+architecture: "x86_64"
+properties:
+    architecture: "x86_64"
+    description: "Custimized image for Ubuntu 22.04 LTS server (20231008)"
+    os: "ubuntu"
+    release: "jammy"
