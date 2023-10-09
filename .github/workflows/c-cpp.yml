@@ -26,7 +26,7 @@ jobs:
         run: git clone https://github.com/lxc/distrobuilder && cd ./distrobuilder && make && cd ..
 
       - name: Build Image
-        run: sudo $HOME/go/bin/distrobuilder build-lxc ubuntu.yaml
+        run: sudo $HOME/go/bin/distrobuilder build-lxd ubuntu.yaml
         
       - name: Tar metadata
         run: sudo tar -cvzf metadata.tar.gz metadata.yaml
@@ -38,7 +38,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           path: |
-            ./rootfs.tar.xz
-            ./meta.tar.xz
-            ./metadata.tar.gz
+            ./*.xz
+            ./*.tar
+            ./*.gz
 
